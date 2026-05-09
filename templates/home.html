@@ -15,6 +15,10 @@
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- QR SCANNER -->
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
     <style>
 
         *{
@@ -25,19 +29,13 @@
         }
 
         body{
-
             background:#eef2ff;
-
             overflow-x:hidden;
         }
 
         .page{
-
-            max-width:1400px;
-
+            max-width:1450px;
             margin:auto;
-
-            padding:40px;
         }
 
         /* ================= NAVBAR ================= */
@@ -45,33 +43,28 @@
         .navbar{
 
             display:flex;
-
             justify-content:space-between;
-
             align-items:center;
 
-            margin-bottom:50px;
+            padding:25px 40px;
         }
 
         .logo h1{
 
             color:#172554;
-
             font-size:42px;
         }
 
         .logo p{
 
             color:#555;
-
-            margin-top:6px;
+            margin-top:5px;
         }
 
         .nav-buttons{
 
             display:flex;
-
-            gap:18px;
+            gap:15px;
         }
 
         .nav-btn{
@@ -96,9 +89,7 @@
         .nav-btn:hover{
 
             background:#2563eb;
-
             color:white;
-
             transform:translateY(-3px);
         }
 
@@ -106,26 +97,33 @@
 
         .hero{
 
-            display:grid;
-
-            grid-template-columns:1fr 1fr;
-
+            display:flex;
+            justify-content:space-between;
             align-items:center;
 
-            gap:50px;
+            padding:60px 40px;
 
-            margin-bottom:70px;
+            gap:60px;
+        }
+
+        .hero-left{
+
+            flex:1;
         }
 
         .hero-left h1{
 
-            font-size:72px;
-
+            font-size:75px;
             color:#172554;
 
-            line-height:1.2;
+            line-height:1.1;
 
             margin-bottom:25px;
+        }
+
+        .hero-left span{
+
+            color:#2563eb;
         }
 
         .hero-left p{
@@ -142,59 +140,45 @@
         .hero-buttons{
 
             display:flex;
-
             gap:20px;
+            flex-wrap:wrap;
         }
 
         .hero-btn{
 
-            text-decoration:none;
+            border:none;
+
+            background:#2563eb;
+
+            color:white;
 
             padding:18px 30px;
 
-            border-radius:18px;
+            border-radius:16px;
 
             font-size:18px;
 
             font-weight:bold;
 
+            cursor:pointer;
+
             transition:0.3s;
         }
 
-        .primary-btn{
-
-            background:#2563eb;
-
-            color:white;
-        }
-
-        .primary-btn:hover{
+        .hero-btn:hover{
 
             background:#1e3a8a;
 
             transform:translateY(-4px);
         }
 
-        .secondary-btn{
+        /* ================= QR CARD ================= */
 
-            background:white;
+        .hero-image{
 
-            color:#2563eb;
-
-            box-shadow:0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .secondary-btn:hover{
-
-            transform:translateY(-4px);
-        }
-
-        /* ================= HERO RIGHT ================= */
-
-        .hero-right{
+            flex:1;
 
             display:flex;
-
             justify-content:center;
         }
 
@@ -206,105 +190,72 @@
 
             border-radius:35px;
 
-            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            box-shadow:0 15px 30px rgba(0,0,0,0.08);
 
-            width:100%;
+            text-align:center;
 
-            max-width:450px;
+            width:420px;
         }
 
         .hero-card h2{
 
             color:#172554;
 
-            margin-bottom:25px;
+            margin-bottom:18px;
 
-            font-size:32px;
+            font-size:34px;
         }
 
         .hero-card p{
 
-            color:#666;
-
-            margin-bottom:30px;
+            color:#555;
 
             line-height:1.7;
+
+            margin-bottom:25px;
         }
 
-        .scan-box{
+        #reader{
 
-            background:#eef2ff;
+            width:320px;
 
-            border-radius:24px;
-
-            padding:40px;
-
-            text-align:center;
-        }
-
-        .scan-box i{
-
-            font-size:100px;
-
-            color:#2563eb;
-
-            margin-bottom:20px;
-        }
-
-        .scan-btn{
-
-            display:inline-block;
+            margin:auto;
 
             margin-top:25px;
 
-            text-decoration:none;
+            display:none;
 
-            background:#2563eb;
+            border-radius:20px;
 
-            color:white;
-
-            padding:16px 28px;
-
-            border-radius:16px;
-
-            font-weight:bold;
-
-            transition:0.3s;
-        }
-
-        .scan-btn:hover{
-
-            background:#1e3a8a;
-
-            transform:translateY(-3px);
+            overflow:hidden;
         }
 
         /* ================= FEATURES ================= */
 
         .features{
 
-            margin-top:40px;
+            padding:70px 40px;
         }
 
         .features-title{
 
             text-align:center;
 
-            margin-bottom:45px;
+            margin-bottom:55px;
         }
 
         .features-title h1{
 
-            font-size:48px;
-
             color:#172554;
 
-            margin-bottom:15px;
+            font-size:46px;
+
+            margin-bottom:12px;
         }
 
         .features-title p{
 
-            color:#666;
+            color:#555;
 
             font-size:18px;
         }
@@ -313,7 +264,8 @@
 
             display:grid;
 
-            grid-template-columns:repeat(3,1fr);
+            grid-template-columns:
+            repeat(auto-fit,minmax(280px,1fr));
 
             gap:30px;
         }
@@ -322,9 +274,9 @@
 
             background:white;
 
-            border-radius:28px;
-
             padding:35px;
+
+            border-radius:30px;
 
             text-align:center;
 
@@ -344,102 +296,103 @@
 
             color:#2563eb;
 
-            margin-bottom:25px;
+            margin-bottom:22px;
         }
 
         .feature-card h2{
 
             color:#172554;
 
-            margin-bottom:18px;
+            margin-bottom:15px;
         }
 
         .feature-card p{
 
-            color:#666;
+            color:#555;
 
             line-height:1.7;
         }
 
-        /* ================= TRACK FORM ================= */
+        /* ================= INFO ================= */
 
-        .track-section{
+        .info{
 
-            margin-top:70px;
-
-            background:white;
-
-            padding:45px;
-
-            border-radius:32px;
-
-            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+            padding:40px;
         }
 
-        .track-section h1{
+        .info-box{
 
-            color:#172554;
-
-            margin-bottom:15px;
-
-            font-size:42px;
-        }
-
-        .track-section p{
-
-            color:#666;
-
-            margin-bottom:35px;
-        }
-
-        .track-form{
-
-            display:flex;
-
-            gap:20px;
-        }
-
-        .track-form input{
-
-            flex:1;
-
-            padding:18px;
-
-            border:none;
-
-            background:#eef2ff;
-
-            border-radius:16px;
-
-            font-size:16px;
-
-            outline:none;
-        }
-
-        .track-form button{
-
-            border:none;
-
-            background:#2563eb;
+            background:linear-gradient(
+                135deg,
+                #2563eb,
+                #1e3a8a
+            );
 
             color:white;
 
-            padding:18px 30px;
+            padding:50px;
 
-            border-radius:16px;
+            border-radius:35px;
 
-            font-size:16px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
 
-            font-weight:bold;
-
-            cursor:pointer;
-
-            transition:0.3s;
+            gap:40px;
         }
 
-        .track-form button:hover{
+        .info-left h1{
 
-            background:#1e3a8a;
+            font-size:45px;
+
+            margin-bottom:18px;
+        }
+
+        .info-left p{
+
+            line-height:1.8;
+
+            font-size:18px;
+        }
+
+        .info-right i{
+
+            font-size:130px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer{
+
+            text-align:center;
+
+            padding:45px;
+
+            color:#555;
+        }
+
+        @media(max-width:950px){
+
+            .hero{
+
+                flex-direction:column;
+            }
+
+            .info-box{
+
+                flex-direction:column;
+                text-align:center;
+            }
+
+            .hero-left h1{
+
+                font-size:55px;
+            }
+
+            .hero-card{
+
+                width:100%;
+            }
         }
 
     </style>
@@ -464,31 +417,25 @@
 
             <p>
 
-                Smart Food Traceability Platform
+                Blockchain Food Traceability
 
             </p>
 
         </div>
-
-        <!-- ONLY SUPPLY CHAIN USERS -->
 
         <div class="nav-buttons">
 
             <a href="/login"
                class="nav-btn">
 
-                <i class="fa fa-right-to-bracket"></i>
-
-                Supply Chain Login
+                Login
 
             </a>
 
             <a href="/signup"
                class="nav-btn">
 
-                <i class="fa fa-user-plus"></i>
-
-                Supply Chain Signup
+                Signup
 
             </a>
 
@@ -506,37 +453,33 @@
 
             <h1>
 
-                Track Food Journey With Blockchain
+                Smart Food
+                <span>
+
+                    Tracking
+
+                </span>
 
             </h1>
 
             <p>
 
-                Customers can scan QR codes and track complete food journey from farm to retail with secure blockchain verification.
+                Track every product journey from farm to retail
+                using blockchain technology and live QR tracking.
 
             </p>
 
             <div class="hero-buttons">
 
-                <!-- CUSTOMER ONLY -->
+                <a href="/user">
 
-                <a href="/user"
-                   class="hero-btn primary-btn">
+                    <button class="hero-btn">
 
-                    <i class="fa fa-magnifying-glass"></i>
+                        <i class="fa fa-magnifying-glass"></i>
 
-                    Track Product
+                        Track By Batch ID
 
-                </a>
-
-                <!-- SUPPLY CHAIN -->
-
-                <a href="/login"
-                   class="hero-btn secondary-btn">
-
-                    <i class="fa fa-user-lock"></i>
-
-                    Supply Chain Access
+                    </button>
 
                 </a>
 
@@ -546,38 +489,35 @@
 
         <!-- RIGHT -->
 
-        <div class="hero-right">
+        <div class="hero-image">
 
             <div class="hero-card">
 
                 <h2>
 
-                    QR Product Tracking
+                    Scan QR Code
 
                 </h2>
 
                 <p>
 
-                    Scan QR codes to check farming data, factory processing, transport and retail journey.
+                    Scan product QR to instantly
+                    track complete food journey.
 
                 </p>
 
-                <div class="scan-box">
+                <button onclick="startScanner()"
+                        class="hero-btn">
 
                     <i class="fa fa-qrcode"></i>
 
-                    <br>
+                    Start Scanner
 
-                    <a href="/user"
-                       class="scan-btn">
+                </button>
 
-                        <i class="fa fa-camera"></i>
+                <!-- QR READER -->
 
-                        Scan & Track
-
-                    </a>
-
-                </div>
+                <div id="reader"></div>
 
             </div>
 
@@ -587,190 +527,234 @@
 
     <!-- ================= FEATURES ================= -->
 
-            <div class="features">
+    <div class="features">
 
-                <div class="features-title">
+        <div class="features-title">
 
-                    <h1>
+            <h1>
 
-                        Supply Chain Features
+                Supply Chain Features
 
-                    </h1>
+            </h1>
 
-                    <p>
+            <p>
 
-                        Complete blockchain based food journey tracking
+                Transparent and secure food supply chain system
 
-                    </p>
+            </p>
 
-                </div>
+        </div>
 
-                <div class="feature-grid">
+        <div class="feature-grid">
 
-                    <!-- FARM -->
+            <!-- FARM -->
 
-                    <div class="feature-card">
+            <div class="feature-card">
 
-                        <i class="fa fa-seedling"></i>
+                <i class="fa fa-seedling"></i>
 
-                        <h2>
+                <h2>
 
-                            Farming Stage
+                    Farming Stage
 
-                        </h2>
+                </h2>
 
-                        <p>
+                <p>
 
-                            Track seed date, harvest date, fertilizer usage and farm details directly from farmers.
+                    Monitor seed date, harvest details and fertilizer usage.
 
-                        </p>
-
-                    </div>
-
-                    <!-- FACTORY -->
-
-                    <div class="feature-card">
-
-                        <i class="fa fa-industry"></i>
-
-                        <h2>
-
-                            Factory Processing
-
-                        </h2>
-
-                        <p>
-
-                            Monitor product processing, packaging type and quality checks at factory level.
-
-                        </p>
-
-                    </div>
-
-                    <!-- WAREHOUSE -->
-
-                    <div class="feature-card">
-
-                        <i class="fa fa-warehouse"></i>
-
-                        <h2>
-
-                            Warehouse Storage
-
-                        </h2>
-
-                        <p>
-
-                            Store and manage products safely with warehouse tracking and inventory updates.
-
-                        </p>
-
-                    </div>
-
-                    <!-- TRANSPORT -->
-
-                    <div class="feature-card">
-
-                        <i class="fa fa-truck"></i>
-
-                        <h2>
-
-                            Transport Tracking
-
-                        </h2>
-
-                        <p>
-
-                            Track shipment routes, driver details and live transportation updates.
-
-                        </p>
-
-                    </div>
-
-                   
-
-                    <!-- RETAIL -->
-
-                    <div class="feature-card">
-
-                        <i class="fa fa-store"></i>
-
-                        <h2>
-
-                            Retail Monitoring
-
-                        </h2>
-
-                        <p>
-
-                            Final retail stage tracking with selling details and customer product verification.
-
-                        </p>
-
-                    </div>
-                    <!-- BLOCKCHAIN -->
-
-                    <div class="feature-card">
-
-                        <i class="fa fa-link"></i>
-
-                        <h2>
-
-                            Blockchain Security
-
-                        </h2>
-
-                        <p>
-
-                            Secure every supply chain update with blockchain technology for transparent and tamper-proof food tracking.
-
-                        </p>
-
-                    </div>
-
-                </div>
+                </p>
 
             </div>
 
+            <!-- FACTORY -->
 
-    <!-- ================= TRACK SECTION ================= -->
+            <div class="feature-card">
 
-    <div class="track-section">
+                <i class="fa fa-industry"></i>
 
-        <h1>
+                <h2>
 
-            Customer Product Tracking
+                    Factory Processing
 
-        </h1>
+                </h2>
 
-        <p>
+                <p>
 
-            Enter Batch ID to track complete food journey
+                    Track processing and packaging information securely.
 
-        </p>
+                </p>
 
-        <form action="/result"
-              method="get"
-              class="track-form">
+            </div>
 
-            <input type="text"
-                   name="id"
-                   placeholder="Enter Batch ID"
-                   required>
+            <!-- WAREHOUSE -->
 
-            <button type="submit">
+            <div class="feature-card">
 
-                <i class="fa fa-magnifying-glass"></i>
+                <i class="fa fa-warehouse"></i>
 
-                Track Now
+                <h2>
 
-            </button>
+                    Warehouse Storage
 
-        </form>
+                </h2>
+
+                <p>
+
+                    Monitor storage temperature and warehouse conditions.
+
+                </p>
+
+            </div>
+
+            <!-- TRANSPORT -->
+
+            <div class="feature-card">
+
+                <i class="fa fa-truck"></i>
+
+                <h2>
+
+                    Transport Tracking
+
+                </h2>
+
+                <p>
+
+                    Track shipment location, driver and vehicle details.
+
+                </p>
+
+            </div>
+
+            <!-- RETAIL -->
+
+            <div class="feature-card">
+
+                <i class="fa fa-store"></i>
+
+                <h2>
+
+                    Retail Monitoring
+
+                </h2>
+
+                <p>
+
+                    Verify retail shop, pricing and expiry information.
+
+                </p>
+
+            </div>
+
+            <!-- BLOCKCHAIN -->
+
+            <div class="feature-card">
+
+                <i class="fa fa-link"></i>
+
+                <h2>
+
+                    Blockchain Security
+
+                </h2>
+
+                <p>
+
+                    Tamper-proof blockchain system for trusted food tracking.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= INFO ================= -->
+
+    <div class="info">
+
+        <div class="info-box">
+
+            <div class="info-left">
+
+                <h1>
+
+                    Why Use Trace System?
+
+                </h1>
+
+                <p>
+
+                    Our blockchain-enabled traceability platform
+                    improves food safety, transparency and trust.
+                    Customers can instantly verify product journeys
+                    using QR technology.
+
+                </p>
+
+            </div>
+
+            <div class="info-right">
+
+                <i class="fa fa-shield-halved"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        © 2026 Trace System | Blockchain Food Traceability
 
     </div>
 
 </div>
+
+<!-- ================= QR SCRIPT ================= -->
+
+<script>
+
+function startScanner(){
+
+    document.getElementById(
+        "reader"
+    ).style.display = "block";
+
+    const html5QrCode =
+    new Html5Qrcode("reader");
+
+    html5QrCode.start(
+
+        {
+            facingMode: "environment"
+        },
+
+        {
+            fps: 10,
+            qrbox: 250
+        },
+
+        (decodedText) => {
+
+            window.location.href =
+            decodedText;
+
+        },
+
+        (errorMessage) => {
+
+        }
+
+    );
+}
+
+</script>
 
 </body>
 
