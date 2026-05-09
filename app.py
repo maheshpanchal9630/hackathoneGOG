@@ -52,7 +52,7 @@ os.makedirs(
 # MONGODB
 # =====================================================
 
-MONGO_URI = "mongodb+srv://mahesh:Mahesh12345@food-trace-cluster.tpzyr6p.mongodb.net/?retryWrites=true&w=majority&appName=food-trace-cluster"
+MONGO_URI = "mongodb+srv://mahesh:mahesh123@food-trace-cluster.tpzyr6p.mongodb.net/?retryWrites=true&w=majority&appName=food-trace-cluster"
 
 client = MongoClient(MONGO_URI)
 
