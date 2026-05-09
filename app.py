@@ -16,6 +16,12 @@ import uuid
 app = FastAPI()
 
 # =====================================================
+# BASE URL
+# =====================================================
+
+BASE_URL = "https://hackathonegog.onrender.com"
+
+# =====================================================
 # STATIC FILES
 # =====================================================
 
@@ -46,11 +52,9 @@ os.makedirs(
 # MONGODB
 # =====================================================
 
-MONGO_URI = "mongodb+srv://mahesh:mahesh123@food-trace-cluster.tpzyr6p.mongodb.net/?retryWrites=true&w=majority&appName=food-trace-cluster"
+MONGO_URI = "mongodb+srv://mahesh:Mahesh12345@food-trace-cluster.tpzyr6p.mongodb.net/?retryWrites=true&w=majority&appName=food-trace-cluster"
 
-client = MongoClient(
-    MONGO_URI
-)
+client = MongoClient(MONGO_URI)
 
 db = client["traceability_db"]
 
@@ -90,9 +94,7 @@ def signup_page(request: Request):
 def signup(
 
     username: str = Form(...),
-
     password: str = Form(...),
-
     role: str = Form(...)
 
 ):
@@ -114,9 +116,7 @@ def signup(
     users_col.insert_one({
 
         "username": username,
-
         "password": password,
-
         "role": role
 
     })
@@ -124,7 +124,6 @@ def signup(
     return RedirectResponse(
 
         url="/login",
-
         status_code=303
     )
 
@@ -148,7 +147,6 @@ def login_page(request: Request):
 def login(
 
     username: str = Form(...),
-
     password: str = Form(...)
 
 ):
@@ -175,12 +173,11 @@ def login(
 
         }
 
-    role = user.get("role")
+    role = user["role"]
 
     return RedirectResponse(
 
         url=f"/dashboard?user={username}&role={role}",
-
         status_code=303
     )
 
@@ -192,9 +189,7 @@ def login(
 def dashboard(
 
     request: Request,
-
     user: str,
-
     role: str
 
 ):
@@ -220,9 +215,7 @@ def dashboard(
         context={
 
             "user": user,
-
             "role": role,
-
             "batches": batches
 
         }
@@ -284,16 +277,12 @@ def add_trace(
     user_role = user["role"]
 
     # =================================================
-    # FARMER CREATE NEW UNIQUE BATCH
+    # FARMER CREATE UNIQUE BATCH
     # =================================================
 
     if user_role == "farm":
 
         batchId = "BATCH-" + str(uuid.uuid4())[:8].upper()
-
-    # =================================================
-    # OTHER USERS UPDATE EXISTING BATCH
-    # =================================================
 
     else:
 
@@ -315,7 +304,7 @@ def add_trace(
     # QR URL
     # =================================================
 
-    qr_url = f"http://127.0.0.1:8000/result?id={batchId}"
+    qr_url = f"{BASE_URL}/result?id={batchId}"
 
     # =================================================
     # CREATE QR
@@ -385,10 +374,6 @@ def add_trace(
 
     })
 
-    # =================================================
-    # REDIRECT
-    # =================================================
-
     return RedirectResponse(
 
         url=f"/dashboard?user={updated_by}&role={user_role}",
@@ -397,7 +382,7 @@ def add_trace(
     )
 
 # =====================================================
-# USER TRACK PAGE
+# USER PAGE
 # =====================================================
 
 @app.get("/user", response_class=HTMLResponse)
@@ -416,7 +401,6 @@ def user_page(request: Request):
 def result(
 
     request: Request,
-
     id: str
 
 ):
@@ -442,7 +426,6 @@ def result(
         context={
 
             "batch": id,
-
             "trace_data": trace_data
 
         }
@@ -458,7 +441,6 @@ def health():
     return {
 
         "status": "running",
-
         "database": "connected"
 
     }
