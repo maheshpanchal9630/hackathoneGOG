@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+
+            background:#eef2ff;
+
+            padding:40px;
+        }
+
+        .page{
+
+            max-width:1450px;
+
+            margin:auto;
+        }
+
+        /* ================= HEADER ================= */
+
+        .top-bar{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:35px;
+        }
+
+        .logo h1{
+
+            color:#172554;
+
+            font-size:42px;
+        }
+
+        .logo p{
+
+            color:#555;
+
+            margin-top:6px;
+        }
+
+        /* ================= NAV ================= */
+
+        .nav-buttons{
+
+            display:flex;
+
+            gap:15px;
+        }
+
+        .nav-btn{
+
+            text-decoration:none;
+
+            background:white;
+
+            color:#2563eb;
+
+            padding:14px 24px;
+
+            border-radius:14px;
+
+            font-weight:bold;
+
+            box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+            transition:0.3s;
+        }
+
+        .nav-btn:hover{
+
+            background:#2563eb;
+
+            color:white;
+
+            transform:translateY(-3px);
+        }
+
+        /* ================= DASHBOARD CARD ================= */
+
+        .dashboard-card{
+
+            background:white;
+
+            border-radius:32px;
+
+            padding:40px;
+
+            margin-bottom:35px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .dashboard-header{
+
+            margin-bottom:35px;
+        }
+
+        .dashboard-header h1{
+
+            color:#172554;
+
+            font-size:38px;
+
+            margin-bottom:10px;
+        }
+
+        .dashboard-header p{
+
+            color:#666;
+
+            font-size:18px;
+        }
+
+        /* ================= FORM ================= */
+
+        .dashboard-form{
+
+            display:flex;
+
+            flex-direction:column;
+
+            gap:25px;
+        }
+
+        .form-row{
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:25px;
+        }
+
+        .input-box{
+
+            display:flex;
+
+            flex-direction:column;
+        }
+
+        .input-box label{
+
+            margin-bottom:10px;
+
+            font-weight:bold;
+
+            color:#172554;
+        }
+
+        .input-icon{
+
+            position:relative;
+        }
+
+        .input-icon i{
+
+            position:absolute;
+
+            left:18px;
+
+            top:18px;
+
+            color:#2563eb;
+        }
+
+        .input-icon input{
+
+            width:100%;
+
+            padding:16px 16px 16px 48px;
+
+            border:none;
+
+            background:#eef2ff;
+
+            border-radius:16px;
+
+            font-size:16px;
+
+            outline:none;
+        }
+
+        textarea{
+
+            padding:18px;
+
+            border:none;
+
+            background:#eef2ff;
+
+            border-radius:16px;
+
+            font-size:16px;
+
+            resize:none;
+
+            height:140px;
+
+            outline:none;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .submit-btn{
+
+            border:none;
+
+            background:#2563eb;
+
+            color:white;
+
+            padding:18px;
+
+            border-radius:18px;
+
+            font-size:18px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .submit-btn:hover{
+
+            background:#1e3a8a;
+
+            transform:translateY(-3px);
+        }
+
+        /* ================= OLD BATCHES ================= */
+
+        .batch-grid{
+
+            display:grid;
+
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+            gap:25px;
+        }
+
+        .batch-card{
+
+            background:#f8fafc;
+
+            border-radius:24px;
+
+            padding:25px;
+
+            border:2px solid transparent;
+
+            transition:0.3s;
+        }
+
+        .batch-card:hover{
+
+            border-color:#2563eb;
+
+            transform:translateY(-5px);
+        }
+
+        .batch-card h2{
+
+            color:#172554;
+
+            margin-bottom:12px;
+        }
+
+        .batch-card p{
+
+            color:#555;
+
+            margin-bottom:10px;
+        }
+
+        .view-btn{
+
+            display:inline-block;
+
+            margin-top:15px;
+
+            text-decoration:none;
+
+            background:#2563eb;
+
+            color:white;
+
+            padding:12px 18px;
+
+            border-radius:12px;
+
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="top-bar">
+
+        <div class="logo">
+
+            <h1>
+
+                Trace System
+
+            </h1>
+
+            <p>
+
+                Smart Food Traceability Dashboard
+
+            </p>
+
+        </div>
+
+        <div class="nav-buttons">
+
+            <a href="/"
+               class="nav-btn">
+
+                <i class="fa fa-house"></i>
+
+                Home
+
+            </a>
+
+            <a href="/login"
+               class="nav-btn">
+
+                <i class="fa fa-right-from-bracket"></i>
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- ================= FARMER ================= -->
+
+    {% if role == "farm" %}
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-header">
+
+            <h1>
+
+                <i class="fa fa-seedling"></i>
+
+                Farmer Dashboard
+
+            </h1>
+
+            <p>
+
+                Create and manage crop batches
+
+            </p>
+
+        </div>
+
+        <form action="/add"
+              method="post"
+              class="dashboard-form">
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Product Name
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-box"></i>
+
+                        <input type="text"
+                               name="product"
+                               placeholder="Rice"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Farm Location
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-location-dot"></i>
+
+                        <input type="text"
+                               name="location"
+                               placeholder="Farm Location"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Seed Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar"></i>
+
+                        <input type="date"
+                               name="seed_date"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Harvest Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar-days"></i>
+
+                        <input type="date"
+                               name="harvest_date"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Fertilizer Used
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-flask"></i>
+
+                        <input type="text"
+                               name="fertilizer"
+                               placeholder="Organic"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar"></i>
+
+                        <input type="date"
+                               name="date"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Time
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-clock"></i>
+
+                        <input type="time"
+                               name="time"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>
+
+                    Farming Details
+
+                </label>
+
+                <textarea name="details"
+                          placeholder="Enter farming details..."
+                          required></textarea>
+
+            </div>
+
+            <input type="hidden"
+                   name="updated_by"
+                   value="{{ user }}">
+
+            <button class="submit-btn">
+
+                <i class="fa fa-leaf"></i>
+
+                Create Batch
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <!-- ================= FACTORY ================= -->
+
+    {% if role == "factory" %}
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-header">
+
+            <h1>
+
+                <i class="fa fa-industry"></i>
+
+                Factory Dashboard
+
+            </h1>
+
+            <p>
+
+                Update processing and packaging information
+
+            </p>
+
+        </div>
+
+        <form action="/add"
+              method="post"
+              class="dashboard-form">
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Batch ID
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-barcode"></i>
+
+                        <input type="text"
+                               name="batchId"
+                               placeholder="Enter Batch ID"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Product Name
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-box"></i>
+
+                        <input type="text"
+                               name="product"
+                               placeholder="Product Name"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Factory Location
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-location-dot"></i>
+
+                        <input type="text"
+                               name="location"
+                               placeholder="Factory Location"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Packaging Type
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-box-open"></i>
+
+                        <input type="text"
+                               name="packaging"
+                               placeholder="Plastic / Box"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar"></i>
+
+                        <input type="date"
+                               name="date"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Time
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-clock"></i>
+
+                        <input type="time"
+                               name="time"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>
+
+                    Factory Details
+
+                </label>
+
+                <textarea name="details"
+                          placeholder="Processing details..."
+                          required></textarea>
+
+            </div>
+
+            <input type="hidden"
+                   name="updated_by"
+                   value="{{ user }}">
+
+            <button class="submit-btn">
+
+                <i class="fa fa-industry"></i>
+
+                Update Factory Data
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <!-- ================= WAREHOUSE ================= -->
+
+    {% if role == "warehouse" %}
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-header">
+
+            <h1>
+
+                <i class="fa fa-warehouse"></i>
+
+                Warehouse Dashboard
+
+            </h1>
+
+            <p>
+
+                Manage storage and warehouse monitoring
+
+            </p>
+
+        </div>
+
+        <form action="/add"
+              method="post"
+              class="dashboard-form">
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Batch ID
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-barcode"></i>
+
+                        <input type="text"
+                               name="batchId"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Product Name
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-box"></i>
+
+                        <input type="text"
+                               name="product"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Warehouse Location
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-location-dot"></i>
+
+                        <input type="text"
+                               name="location"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Storage Temperature
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-temperature-half"></i>
+
+                        <input type="text"
+                               name="storage_temp"
+                               placeholder="5°C"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Shelf Number
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-layer-group"></i>
+
+                        <input type="text"
+                               name="shelf"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Humidity Level
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-cloud"></i>
+
+                        <input type="text"
+                               name="humidity"
+                               placeholder="65%"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar"></i>
+
+                        <input type="date"
+                               name="date"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Time
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-clock"></i>
+
+                        <input type="time"
+                               name="time"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>
+
+                    Warehouse Details
+
+                </label>
+
+                <textarea name="details"
+                          placeholder="Warehouse details..."
+                          required></textarea>
+
+            </div>
+
+            <input type="hidden"
+                   name="updated_by"
+                   value="{{ user }}">
+
+            <button class="submit-btn">
+
+                <i class="fa fa-warehouse"></i>
+
+                Update Warehouse Data
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <!-- ================= TRANSPORT ================= -->
+
+    {% if role == "transport" %}
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-header">
+
+            <h1>
+
+                <i class="fa fa-truck"></i>
+
+                Transport Dashboard
+
+            </h1>
+
+            <p>
+
+                Manage shipment and transport details
+
+            </p>
+
+        </div>
+
+        <form action="/add"
+              method="post"
+              class="dashboard-form">
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Batch ID
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-barcode"></i>
+
+                        <input type="text"
+                               name="batchId"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Product Name
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-box"></i>
+
+                        <input type="text"
+                               name="product"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Current Location
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-location-dot"></i>
+
+                        <input type="text"
+                               name="location"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Destination
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-map-location-dot"></i>
+
+                        <input type="text"
+                               name="destination"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Vehicle Number
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-truck-moving"></i>
+
+                        <input type="text"
+                               name="vehicle"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Driver Name
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-user"></i>
+
+                        <input type="text"
+                               name="driver"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar"></i>
+
+                        <input type="date"
+                               name="date"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Time
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-clock"></i>
+
+                        <input type="time"
+                               name="time"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>
+
+                    Transport Details
+
+                </label>
+
+                <textarea name="details"
+                          placeholder="Shipment details..."
+                          required></textarea>
+
+            </div>
+
+            <input type="hidden"
+                   name="updated_by"
+                   value="{{ user }}">
+
+            <button class="submit-btn">
+
+                <i class="fa fa-truck"></i>
+
+                Update Transport Data
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <!-- ================= RETAIL ================= -->
+
+    {% if role == "retail" %}
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-header">
+
+            <h1>
+
+                <i class="fa fa-store"></i>
+
+                Retail Dashboard
+
+            </h1>
+
+            <p>
+
+                Manage final product selling information
+
+            </p>
+
+        </div>
+
+        <form action="/add"
+              method="post"
+              class="dashboard-form">
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Existing Batch ID
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-barcode"></i>
+
+                        <input type="text"
+                               name="batchId"
+                               placeholder="Enter Existing Batch ID"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Product Name
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-box"></i>
+
+                        <input type="text"
+                               name="product"
+                               placeholder="Enter Product Name"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Retail Shop Name
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-store"></i>
+
+                        <input type="text"
+                               name="shop_name"
+                               placeholder="Fresh Mart"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Shop Location
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-location-dot"></i>
+
+                        <input type="text"
+                               name="location"
+                               placeholder="Shop Location"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Selling Price
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-indian-rupee-sign"></i>
+
+                        <input type="text"
+                               name="price"
+                               placeholder="₹120"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Expiry Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar-days"></i>
+
+                        <input type="date"
+                               name="expiry_date"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-box">
+
+                    <label>
+
+                        Update Date
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-calendar"></i>
+
+                        <input type="date"
+                               name="date"
+                               required>
+
+                    </div>
+
+                </div>
+
+                <div class="input-box">
+
+                    <label>
+
+                        Update Time
+
+                    </label>
+
+                    <div class="input-icon">
+
+                        <i class="fa fa-clock"></i>
+
+                        <input type="time"
+                               name="time"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>
+
+                    Retail Details
+
+                </label>
+
+                <textarea name="details"
+                          placeholder="Enter product selling details..."
+                          required></textarea>
+
+            </div>
+
+            <input type="hidden"
+                   name="updated_by"
+                   value="{{ user }}">
+
+            <button type="submit"
+                    class="submit-btn">
+
+                <i class="fa fa-store"></i>
+
+                Update Retail Data
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <!-- ================= OLD BATCHES ================= -->
+
+    <div class="dashboard-card">
+
+        <div class="dashboard-header">
+
+            <h1>
+
+                <i class="fa fa-clock-rotate-left"></i>
+
+                Old Batches
+
+            </h1>
+
+            <p>
+
+                Previously updated product batches
+
+            </p>
+
+        </div>
+
+        <div class="batch-grid">
+
+            {% for batch in batches %}
+
+            <div class="batch-card">
+
+                <h2>
+
+                    {{ batch.batchId }}
+
+                </h2>
+
+                <p>
+
+                    <b>Product:</b>
+
+                    {{ batch.product }}
+
+                </p>
+
+                <p>
+
+                    <b>Location:</b>
+
+                    {{ batch.location }}
+
+                </p>
+
+                <p>
+
+                    <b>Date:</b>
+
+                    {{ batch.date }}
+
+                </p>
+
+                <a href="/result?id={{ batch.batchId }}"
+                   class="view-btn">
+
+                    View Details
+
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
